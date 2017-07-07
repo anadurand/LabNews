@@ -7,6 +7,7 @@ var to5 = require('gulp-6to5');
 var concat = require('gulp-concat');
 var uglify = require('gulp-uglify');
 var browserSync = require('browser-sync').create();
+var nodemon = require('gulp-nodemon');
 
 var config = {
   source: './src/',
@@ -49,25 +50,25 @@ gulp.task('sass', ()=> {
 
 });
 
-// gulp.task('js', ()=> {
-//    gulp.src(sources.rootJS)
-//       .pipe(plumber())
-//       .pipe(to5())
-//       .pipe(concat("app.js"))
-//       .pipe(uglify())
-//       .pipe(gulp.dest(config.dist + paths.assets + "js"))
-//       .pipe(browserSync.stream());
-// });
-
-
-
 gulp.task('js', ()=> {
    gulp.src(sources.rootJS)
-      .pipe(browserify())
-      .pipe(rename("app.js"))
+      .pipe(plumber())
+      .pipe(to5())
+      .pipe(concat("app.js"))
+      .pipe(uglify())
       .pipe(gulp.dest(config.dist + paths.assets + "js"))
       .pipe(browserSync.stream());
 });
+
+
+
+// gulp.task('js', ()=> {
+//    gulp.src(sources.rootJS)
+//       .pipe(browserify())
+//       .pipe(rename("app.js"))
+//       .pipe(gulp.dest(config.dist + paths.assets + "js"))
+//       .pipe(browserSync.stream());
+// });
 
 gulp.task('html-watch', ["html"], function (done) {
   browserSync.reload();
@@ -78,8 +79,19 @@ gulp.task('img-watch', ["img"], function (done) {
   done();
 });
 
+// gulp.task('nodemon', function (cb) {
+//     var callbackCalled = false;
+//     return nodemon({script: 'server.js'}).on('start', function () {
+//         if (!callbackCalled) {
+//             callbackCalled = true;
+//             cb();
+//         }
+//     });
+// });
+
 gulp.task('serve', ()=> {
   browserSync.init({
+    // proxy: "http://localhost:3000",
     server: {
       baseDir: config.dist
     }
