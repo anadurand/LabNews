@@ -79,22 +79,22 @@ gulp.task('img-watch', ["img"], function (done) {
   done();
 });
 
-// gulp.task('nodemon', function (cb) {
-//     var callbackCalled = false;
-//     return nodemon({script: 'server.js'}).on('start', function () {
-//         if (!callbackCalled) {
-//             callbackCalled = true;
-//             cb();
-//         }
-//     });
-// });
+gulp.task('nodemon', function (cb) {
+    var callbackCalled = false;
+    return nodemon({script: 'server.js'}).on('start', function () {
+        if (!callbackCalled) {
+            callbackCalled = true;
+            cb();
+        }
+    });
+});
 
-gulp.task('serve', ()=> {
-  browserSync.init({
-    // proxy: "http://localhost:3000",
-    server: {
-      baseDir: config.dist
-    }
+gulp.task('serve',['nodemon'], ()=> {
+  browserSync.init(null,{
+    proxy: "http://localhost:3000",
+    // server: {
+    //   baseDir: config.dist
+    // }
   });
   gulp.watch(sources.sass, ['sass']);
   gulp.watch(sources.js, ['js']);
