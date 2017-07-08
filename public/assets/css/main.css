@@ -61,8 +61,15 @@ nav.menu {
     color: white;
     font-weight: bold; }
 
-.mundoNews .title {
-  font-weight: 900; }
+.mundoNews .contenedor {
+  margin-bottom: 30px; }
+  .mundoNews .contenedor .newsGrande .news__Img {
+    min-height: 379px; }
+    .mundoNews .contenedor .newsGrande .news__Img--img {
+      width: 100%;
+      height: 100%; }
+  .mundoNews .contenedor .newsCentro div {
+    margin-bottom: 5px; }
 
 * {
   box-sizing: border-box;
@@ -75,6 +82,9 @@ body {
 .pd-l-0 {
   padding-left: 0; }
 
+.pd-r-0 {
+  padding-right: 0; }
+
 .pd-0 {
   padding: 0; }
 
@@ -82,3 +92,6 @@ body {
   width: 40px;
   border: 3px solid #F7B617;
   align: left; }
+
+.title {
+  font-weight: 900; }
